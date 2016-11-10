@@ -27,7 +27,14 @@ export default Ember.Component.extend({
   moveComponentToBody: Ember.on('didInsertElement', function() {
     let _self = this;
     let dom = this.$().detach();
-    Ember.$('body').append(dom);
+    let parentDomElement = 'body';
+    const config = Ember.getOwner(this).resolveRegistration('config:environment');
+
+    if (config.APP.rootElement) {
+      //If testing append element to rootElement in users environment/config instead of body
+      parentDomElement = config.APP.rootElement;
+    }
+    Ember.$(parentDomElement).append(dom);
 
     let menuAbstract = this.get('menuAbstract');
 
