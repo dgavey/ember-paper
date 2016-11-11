@@ -42,9 +42,11 @@ export default Ember.Component.extend({
       window.requestAnimationFrame(function() {
         menuAbstract.registerWrapper(_self);
         window.requestAnimationFrame(function() {
-          _self.$().addClass('md-active');
-          _self.set('alreadyOpen', true);
-          _self.$()[0].style[_self.get('constants').get('CSS').TRANSFORM] = '';
+          if (!_self.get('isDestroyed')) {
+            _self.$().addClass('md-active');
+            _self.set('alreadyOpen', true);
+            _self.$()[0].style[_self.get('constants').get('CSS').TRANSFORM] = '';
+          }
         });
       });
     });
