@@ -57,6 +57,8 @@ export default Ember.Component.extend({
   }),
 
   willDestroyElement() {
+    //Remove element from body
+    this.$().remove();
     // Destroy resize handler.
     Ember.$(window).off('resize', this.get('_resizeHandler'));
   },
